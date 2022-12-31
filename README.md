@@ -3,7 +3,7 @@
 
 ## General informations:
 - this service check is for the checkMK agent
-- please make sure thad python3 and the libraries `os`, `subrocess`, `datetime` are installed to on the client
+- please make sure thad python3 and the libraries `os`, `subrocess`, `datetime` are installed on the client
 - change the variable content of `backup_path` and `job_name` in the veeam-backup.py
 
 
