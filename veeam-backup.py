@@ -3,12 +3,27 @@
 # Version 1.02
 # Created on 29.12.2022
 
-import os, subprocess, datetime
-from datetime import date
-
 
 backup_path = "/var/log/veeam/Backup/"
 job_name = "Backup-Job"
+
+
+try:
+    import os
+except:
+    exit("please install the libraries 'os'")
+else:
+    try:
+        import subprocess
+    except:
+        exit("please install the libraries 'subprocess'")
+    else:
+        try:
+            import datetime
+            from datetime import date
+        except:
+            exit("please install the libraries 'datetime'")
+
 
 date_today = date.today()
 date_yesterday = date_today + datetime.timedelta(days=-1)
@@ -24,6 +39,7 @@ session_yesterday = subprocess.run(
     ["veeamconfig", "session", "list", "|", "grep", f'{job_name}', "|", "grep", f'{date_yesterday}'],
     capture_output=True,
 )
+
 
 def main():
 
