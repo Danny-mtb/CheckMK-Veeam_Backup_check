@@ -5,8 +5,6 @@
 - this service check is for the checkMK agent 
 
 
----
-
 ## setup
 
 1. put the script into: `/usr/lib/check_mk/local/`
