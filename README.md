@@ -2,7 +2,9 @@
 
 
 ## General informations:
-- this service check is for the checkMK agent 
+- this service check is for the checkMK agent
+- please make sure the libraries `os`, `subrocess` and `datetime` are installed on the client
+- change the variable content of `backup_path` and `job_name` in the veeam-backup.py
 
 
 ## setup
