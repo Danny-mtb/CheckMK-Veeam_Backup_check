@@ -1,12 +1,12 @@
 #!/usr/bin/env python3
 #
-# Version 3.01
+# Version 3-rc
 # Created on 14.02.2023
 
 
-backupID = "7e54e25a-d2db-420b-b1b2-a66bd4d8a523"
-job_name = "Backup-Job"
-backup_path = "/var/log/veeam/Backup/"
+backupID = ""
+job_name = ""
+backup_path = ""
 
 
 try:
