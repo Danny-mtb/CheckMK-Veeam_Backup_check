@@ -1,12 +1,11 @@
 #!/usr/bin/env python3
 #
-# Version 3-rc
-# Created on 14.02.2023
+# Version 3.0-rc
+# Created on 18.02.2023
 
 
 backupID = ""
 job_name = ""
-backup_path = ""
 
 
 try:
@@ -30,7 +29,6 @@ date_today = date.today()
 date_yesterday = date_today + datetime.timedelta(days=-1)
 time_now = datetime.datetime.now().strftime("%H:%M:%S")
 
-
 try:
     point = subprocess.run(
         ["veeamconfig point list --backupId " f'{backupID}' "| grep " f'{date_today}'],
@@ -51,6 +49,12 @@ except:
 try:
     session = subprocess.run(
         ["veeamconfig session list | grep " f'{job_name}' " | grep " f'{date_today}'],
+        shell=True,
+        capture_output=True,
+    )
+
+    session_yesterday = subprocess.run(
+        ["veeamconfig", "session", "list", "|", "grep", f'{job_name}', "|", "grep", f'{date_yesterday}'],
         shell=True,
         capture_output=True,
     )
@@ -82,14 +86,20 @@ else:
             ).stdout.decode("utf-8")
 
             if job_name in output and "Running" in output:
-                subprocess.call(["echo", "3 Veeam-Backup Backup=1;;;0;1 Backup is running", f'{time_now}'],
-                                stdout=True)
+                subprocess.call(
+                    ["echo", "3 Veeam-Backup Backup=1;;;0;1 Backup is running", f'{time_now}'],
+                    stdout=True
+                )
                 exit()
+
             elif job_name in output and "Stopping" in output:
                 os.system("clear")
-                subprocess.call(["echo", "2 Veeam-Backup Backup=0;;;0;1 Backup failed at:", f'{time_now}'],
-                                stdout=True)
+                subprocess.call(
+                    ["echo", "2 Veeam-Backup Backup=0;;;0;1 Backup failed at:", f'{time_now}'],
+                    stdout=True
+                )
                 exit()
+
             break
 
         if "Success" in str(session) and len(str(check_var)) > 2:
